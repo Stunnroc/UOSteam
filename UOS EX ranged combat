@@ -1,0 +1,75 @@
+@getenemy 'murderer' 'enemy' 'criminal' 'gray' 'closest'
+pause 100
+if not @findobject 'RangedWeapon'
+  headmsg 'Please target your Ranged Weapon'
+  promptalias 'RangedWeapon' 15000
+endif
+
+if not timerexists 'consecrateweapon'
+  @createtimer 'consecrateweapon'
+  @settimer 'consecrateweapon' 0
+endif
+if not timerexists 'divinefury'
+  @createtimer 'divinefury'
+  @settimer 'divinefury' 0
+endif
+if not timerexists 'discord'
+  @createtimer 'discord'
+  @settimer 'discord' 0
+endif
+if not timerexists 'abilitytimer'
+  createtimer 'abilitytimer'
+  settimer 'abilitytimer' 0
+endif
+if @inrange 'enemy' 10
+    if hits 'enemy' == maxhits 'enemy'
+      virtue 'honor'
+      waitfortarget 5000
+      target! 'enemy' 200
+      pause 100
+      canceltarget
+	  attack 'enemy'
+	  endif
+endif
+if timer 'discord' > 2500
+  if @inrange 'enemy' 14
+    useskill 'discordance'
+    pause 300
+    target! 'enemy'
+  endif
+  settimer 'discord' 0
+endif
+//equip weapon
+if not @findobject 'righthand'
+  equipitem 'RangedWeapon' 1
+  pause 500
+endif
+
+//Sets primary weapon ability to on (spams primary weapon ability)
+//-----------------------------------------------
+if mana > 34 and timer 'abilitytimer' > 500
+  // @setability 'primary' 'on'
+endif
+//Casts Divine Fury if stam drops under 125
+//-----------------------------------------------
+if stam < maxstam
+  if timer 'divinefury' >= 10000
+    cast 'Divine Fury'
+    pause 300
+    @settimer 'divinefury' 0
+    if @injournal 'not yet recovered' 'system' or @injournal 'you are already' 'system'
+      replay
+    endif
+  endif
+endif
+//-----------------------------------------------
+//Creates, sets timer for and casts Consecrate Weapon
+//-----------------------------------------------
+if timer 'consecrateweapon' >= 9000
+  cast "Consecrate Weapon"
+  settimer 'consecrateweapon' 0'
+  pause 500
+  if @injournal 'not yet recovered' 'system' or @injournal 'you are already' 'system'
+    replay
+  endif
+endif

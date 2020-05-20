@@ -1,0 +1,233 @@
+//////////////////////////
+//////////////////////////
+//////////////////////////
+////////Combat Ranged v 1.1a
+//////////////////////////
+///Setup
+if not @findobject 'RangedWeapon'
+  headmsg 'Please target your Ranged Weapon'
+  promptalias 'RangedWeapon' 15000
+endif
+if not @findobject 'shield'
+  headmsg 'Please target your Shield'
+  promptalias 'shield' 15000
+endif
+if not @findobject 'Lootbag'
+  headmsg 'Please target your Lootbag'
+  promptalias 'Lootbag' 15000
+endif
+if not @findalias 'portableforge'
+  headmsg 'Please target your Portable Forge'
+  promptalias 'portableforge' 15000
+endif
+if not @findalias 'portabank'
+  headmsg 'Please target your Bank Crystal'
+  promptalias 'portabank' 15000
+endif
+//////////////////////////////////////
+//////////////////////////////////////
+//////////////////////////////////////
+// Lists
+////////////////////////
+@removelist 'tailorclips'
+if not @listexists 'tailorclips'
+  createlist 'tailorclips'
+  pushlist 'tailorclips' 0x1b0a //bones
+  pushlist 'tailorclips' 0x1b0d //bones
+  pushlist 'tailorclips' 0x1b0f //bones
+  pushlist 'tailorclips' 0x1b0c //bones
+  pushlist 'tailorclips' 0x1b17 //bones
+  pushlist 'tailorclips' 0x1b0b //bones
+  pushlist 'tailorclips' 0x1b0e //bones
+  pushlist 'tailorclips' 0x1b10 //bones
+  pushlist 'tailorclips' 0x1b09 //bones
+endif
+///////////////////////////////////////
+///////////////////////////////////////
+///////////////////////////////////////
+//Timers
+if not timerexists 'consecratetimer'
+  createtimer 'consecratetimer'
+  settimer 'consecratetimer' 0
+endif
+if not timerexists 'discotimer'
+  createtimer 'discotimer'
+  settimer 'discotimer' 0
+endif
+if not timerexists 'bandagetimer'
+  createtimer 'bandagetimer'
+  settimer 'bandagetimer' 0
+endif
+if not timerexists 'abilitytimer'
+  createtimer 'abilitytimer'
+  settimer 'abilitytimer' 0
+endif
+if not timerexists 'cursetimer'
+  createtimer 'cursetimer'
+  settimer 'cursetimer' 0
+endif
+/////////
+/////////
+/////////
+///////// Main Loop
+//equip weapon
+if not @findobject 'righthand'
+  equipitem 'RangedWeapon' 1
+  pause 500
+endif
+//equip shield
+if not @findobject 'lefthand' and @findobject 'righthand'
+  equipitem 'shield' 1
+  pause 500
+endif
+@getenemy 'murderer' 'enemy' 'criminal' 'gray' 'closest'
+pause 400
+if @findobject 'enemy'
+  @clearjournal
+  if @inrange 'enemy' 10
+    if hits 'enemy' == maxhits 'enemy'
+      virtue 'honor'
+      waitfortarget 5000
+      target! 'enemy' 200
+      pause 300
+      canceltarget
+      attack 'enemy'
+    endif
+    ////////////////////////////////////////
+    ////////////////////////////////////////
+    ////////////////////////////////////////
+    ////////////////////////////////////////
+    ////////////////////////////////////////
+    ////////////////////////////////////////
+    ////////////////////////////////////////
+    ////////////////////////////////////////
+    ////////////////////////////////////////
+    ////////////////////////////////////////
+    //use ability
+    // comment out the one you wish not to use
+    if mana >= 64 and timer 'abilitytimer' > 500
+      //primary
+      //setability 'primary' 'on'
+      //secondary
+      setability 'secondary' 'on'
+      ////////////////////////////////////////
+      ////////////////////////////////////////
+      ////////////////////////////////////////
+      ////////////////////////////////////////
+      ////////////////////////////////////////
+      ////////////////////////////////////////
+      ////////////////////////////////////////
+      ////////////////////////////////////////
+      ////////////////////////////////////////
+      ////////////////////////////////////////
+    endif
+    if @injournal 'attack with lightning!' or @injournal 'failure message'
+      cast "counter attack"
+      clearjournal
+    endif
+    if diffhits >= 15
+      cast "Evasion"
+    endif
+    ///////////////////////////
+    ///////////////////////////
+    ///////////////////////////
+    /////Disco target
+    if not @injournal 'jarring' and not @injournal 'already' and not @injournal 'would have no effect'
+      if timer 'discotimer' >= 2050 and @inrange 'enemy' 6
+        useskill 'Discordance'
+        waitfortarget 1000
+        target! 'enemy' 2000
+        settimer 'discotimer' 0
+        pause 126
+        canceltarget
+      endif
+      clearjournal
+    endif
+    ////////////////
+    ////////////////
+    ////////////////
+    // Divine Fury
+    if not buffexists "divine fury"
+      cast 'Divine Fury'
+      pause 500
+      if @injournal 'not yet recovered' 'system' or @injournal 'you are already' 'system'
+        replay
+      endif
+      clearjournal
+    endif
+    /////////////////////
+    /////////////////////
+    /////////////////////
+    ///// Consecrate Weapon
+    if timer 'consecratetimer' >= 9000
+      if not buffexists "Consecrate Weapon"
+        cast "Consecrate Weapon"
+        pause 500
+        settimer 'consecratetimer' 0
+        if @injournal 'not yet recovered' 'system' or @injournal 'you are already' 'system'
+          replay
+        endif
+        clearjournal
+      endif
+    endif
+    attack 'enemy'
+  endif
+endif
+///////////////////////////////////////////
+///////////////////////////////////////////
+///////////////////////////////////////////
+// smelt ore's
+if @usetype! 0x19b9 'any' 'backpack'
+  waitfortarget 1500
+  @target! 'portableforge'
+elseif @usetype! 0x19b8 'any' 'backpack'
+  waitfortarget 1500
+  @target! 'portableforge'
+elseif @usetype! 0x19ba 'any' 'backpack'
+  waitfortarget 1500
+  @target! 'portableforge'
+endif
+///////////////////////////////
+//clip hides to leather
+for 0 to 'tailorclips'
+  while @findtype 'tailorclips[]'
+    @usetype 0xf9f
+    waitfortarget 1000
+    @target! 'found'
+    break
+  endwhile
+endfor
+///////////////////////////////////////////
+///////////////////////////////////////////
+///////////////////////////////////////////
+// Use Storage Key's
+////////////////////////////////
+// Use Storage Key's
+waitforcontext 0x4648c693 2 15000
+////////////////////////////////
+// checks and gold
+while @findtype 0xeed 0x0 'backpack'
+  @usetype 0xeed 0x0 'backpack'
+endwhile
+if @findtype 0x14f0 52 'backpack'
+  useobject 0x42c79fe3
+  waitforgump 0x9021dd59 1500
+  replygump 0x9021dd59 5 2
+  waitfortarget 1500
+  targettype! 0x14f0 52 500
+  canceltarget
+  replygump 0x9021dd59 0 2
+endif
+if @contents 'tokenbag' >= 1
+  waitforcontext 0x42c79fe7 0 1500
+endif
+clearignorelist
+if @findtype 0xeef 'any' 'ground'
+  headmsg 'Leprechan Gold!' 2125 'found'
+  if @inrange 'found' 1
+    useobject! 'found'
+  endif
+endif
+while @findtype 0xeed 'any' 'ground'
+  useobject! 'found'
+endwhile

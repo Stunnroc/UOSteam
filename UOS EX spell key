@@ -1,0 +1,72 @@
+if @findtype 0x176b '33' 'backpack'
+  if property "spell caster" 'found'
+    @setalias 'spellkey' 'found'
+  endif
+endif
+if @findtype 0xf0e 1042 'backpack'
+  @ignoreobject 'found'
+  replay
+elseif @findtype 0xe24 0x0 'backpack'
+  @ignoreobject 'found'
+  replay
+elseif @findtype 0xe24 1657 'backpack'
+  @ignoreobject 'found'
+  replay
+elseif @findtype 0x1f14 50 'backpack'
+  @ignoreobject 'found'
+  replay
+endif
+if not listexists 'spellregz'
+  createlist 'spellregz'
+  @pushlist 'spellregz' '0xf7a' // BlackPearl
+  @pushlist 'spellregz' '0xf7b' // BloodMoss
+  @pushlist 'spellregz' '0xf84' // Garlic
+  @pushlist 'spellregz' '0xf85' // Ginseng
+  @pushlist 'spellregz' '0xf86' // MandrakeRoot
+  @pushlist 'spellregz' '0xf88' // NightShade
+  @pushlist 'spellregz' '0xf8c' // SulfurousAsh
+  @pushlist 'spellregz' '0xf8d' // SpidersSilk
+  @pushlist 'spellregz' '0xf78' // BatWing
+  @pushlist 'spellregz' '0xf8f' // GraveDust
+  @pushlist 'spellregz' '0xf7d' // DeamonBlood
+  @pushlist 'spellregz' '0xf8e' // NoxCrystal
+  @pushlist 'spellregz' '0xf8a' // PigIron
+  @pushlist 'spellregz' '0xf81' // FertileDirt
+  @pushlist 'spellregz' '0x26b7' // ZoogiFungus
+  @pushlist 'spellregz' '0x26b8' // TransPowder
+  @pushlist 'spellregz' '0xf7e' // Bones
+  @pushlist 'spellregz' '0xf80' // DemonBones
+  @pushlist 'spellregz' '0xef3' // BlankScrolls
+  @pushlist 'spellregz' '0xf0e' // Bottles
+  @pushlist 'spellregz' '0x11ea' // Sand
+  @pushlist 'spellregz' '0x1422' // BeesWax
+  @pushlist 'spellregz' '0xe24' // SpringWater
+  @pushlist 'spellregz' '0xe1f' // DestroyingAngel
+  @pushlist 'spellregz' '0x97a' // PetrifiedWood
+  @pushlist 'spellregz' '0xf8f' // EtheralPowder
+  @pushlist 'spellregz' '0x1f14' // Runes
+endif
+for 0 to spellregz
+  while @findtype spellregz[]
+    @setalias 'regz' 'found'
+    if @targetexists
+      @target 'regz'
+    else
+      useobject 'spellkey'
+      waitforgump 247257139 1500
+      replygump 0xebcd833 60030
+      waitforgump 247257139 1500
+    endif
+  endwhile
+endfor
+@canceltarget
+@removelist 'spellregz'
+@unsetalias 'regz'
+@unsetalias 'spellkey'
+if @gumpexists 247257139
+  replygump 0xebcd833 0
+  replay
+else
+  headmsg 'Done with Spellcasters keys.' 32
+  stop
+endif

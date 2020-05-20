@@ -1,0 +1,68 @@
+if @findtype 0x176b '33' 'backpack'
+  if property "spell caster" 'found'
+    @setalias 'spellkey' 'found'
+  endif
+endif
+if @findtype 0xf0e 1042 'backpack'
+  @ignoreobject 'found'
+  replay
+elseif @findtype 0xe24 0x0 'backpack'
+  @ignoreobject 'found'
+  replay
+elseif @findtype 0xe24 1657 'backpack'
+  @ignoreobject 'found'
+  replay
+elseif @findtype 0x1f14 50 'backpack'
+  @ignoreobject 'found'
+  replay
+endif
+if not listexists 'spellcasterkeys'
+  createlist 'spellcasterkeys'
+endif
+@pushlist 'spellcasterkeys' '0xf7a' // BlackPearl
+@pushlist 'spellcasterkeys' '0xf7b' // BloodMoss
+@pushlist 'spellcasterkeys' '0xf84' // Garlic
+@pushlist 'spellcasterkeys' '0xf85' // Ginseng
+@pushlist 'spellcasterkeys' '0xf86' // MandrakeRoot
+@pushlist 'spellcasterkeys' '0xf88' // NightShade
+@pushlist 'spellcasterkeys' '0xf8c' // SulfurousAsh
+@pushlist 'spellcasterkeys' '0xf8d' // SpidersSilk
+@pushlist 'spellcasterkeys' '0xf78' // BatWing
+@pushlist 'spellcasterkeys' '0xf8f' // GraveDust
+@pushlist 'spellcasterkeys' '0xf7d' // DeamonBlood
+@pushlist 'spellcasterkeys' '0xf8e' // NoxCrystal
+@pushlist 'spellcasterkeys' '0xf8a' // PigIron
+@pushlist 'spellcasterkeys' '0xf81' // FertileDirt
+@pushlist 'spellcasterkeys' '0x26b7' // ZoogiFungus
+@pushlist 'spellcasterkeys' '0x26b8' // TransPowder
+@pushlist 'spellcasterkeys' '0xf7e' // Bones
+@pushlist 'spellcasterkeys' '0xf80' // DemonBones
+@pushlist 'spellcasterkeys' '0xef3' // BlankScrolls
+@pushlist 'spellcasterkeys' '0xf0e' // Bottles
+@pushlist 'spellcasterkeys' '0x11ea' // Sand
+@pushlist 'spellcasterkeys' '0x1422' // BeesWax
+@pushlist 'spellcasterkeys' '0xe24' // SpringWater
+@pushlist 'spellcasterkeys' '0xe1f' // DestroyingAngel
+@pushlist 'spellcasterkeys' '0x97a' // PetrifiedWood
+@pushlist 'spellcasterkeys' '0xf8f' // EtheralPowder
+@pushlist 'spellcasterkeys' '0x1f14' // Runes
+for 0 to spellcasterkeys
+  while @findtype 'spellcasterkeys[]'
+    @setalias 'regs' 'found'
+    if targetexists
+      @target 'regs'
+    else
+      useobject 'spellkey'
+      waitforgump 247257139 15000
+      replygump 0xebcd833 60030
+    endif
+  endwhile
+endfor
+@canceltarget
+@removelist 'spellcasterkeys'
+@unsetalias 'regs'
+headmsg 'Done with Spellcasters keys.'
+pause 1000
+if @gumpexists 247257139
+  replygump 0xebcd833 0
+endif

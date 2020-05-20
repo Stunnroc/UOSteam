@@ -1,0 +1,21 @@
+if not @findobject 'craftbag'
+  headmsg 'Please target the Craft Bag containing the axes to sort'
+  promptalias 'craftbag' 15000
+  @useobject 'craftbag'
+  pause 300
+endif
+if not @findobject 'salvagebag'
+  headmsg 'Please target the Salvage Bag'
+  promptalias 'salvagebag' 15000
+endif
+if not @findobject 'keepbag'
+  headmsg 'Please target the Bag for the axes you are saving'
+  promptalias 'keepbag' 15000
+endif
+while @findtype 0xf4b 'any' 'craftbag'
+  if @property 'Mana Leech' 'found' and @property 'Life Leech' 'found'
+    @moveitem 'found' 'keepbag'
+  else
+    @moveitem 'found' 'salvagebag'
+  endif
+endwhile

@@ -1,0 +1,130 @@
+if dead 'self'
+  stop
+endif
+if not @findobject 'IngotRunebook'
+  headmsg 'Please target your Ingot Runebook'
+  promptalias 'IngotRunebook' 15000
+endif
+if not @listexists 'runebooks'
+  @createlist 'runebooks'
+endif
+if not listexists 'Runes'
+  createlist 'Runes'
+endif
+if not @findobject 'ingotkey'
+  headmsg 'Please target your INGOT Key'
+  promptalias 'ingotkey' 15000
+endif
+if list 'runebooks' == 0
+  pushlist 'runebooks' 'IngotRunebook'
+  //  pushlist 'runebooks' 'rune2'
+endif
+if not timerexists 'sacredcooldown'
+  createtimer 'sacredcooldown'
+  settimer 'sacredcooldown' 0
+endif
+if not listexists 'NPCSales'
+  createlist 'NPCSales'
+  pushlist 'NPCSales' 0x40871
+  pushlist 'NPCSales' 0x4086f
+  pushlist 'NPCSales' 0x40950
+  pushlist 'NPCSales' 0x4094f
+  pushlist 'NPCSales' 0x40901
+  pushlist 'NPCSales' 0x40902
+  pushlist 'NPCSales' 0x7a5ef
+  pushlist 'NPCSales' 0x7a5ee
+  pushlist 'NPCSales' 0x1a6c6f
+  pushlist 'NPCSales' 0x1a6d3f
+  pushlist 'NPCSales' 0x40a4d
+  pushlist 'NPCSales' 0x40a4e
+  pushlist 'NPCSales' 0x1bfe0d
+  pushlist 'NPCSales' 0x1bfdd4
+  pushlist 'NPCSales' 0x1328ee
+  pushlist 'NPCSales' 0x1328ed
+  pushlist 'NPCSales' 0xa1fd4
+  pushlist 'NPCSales' 0xa1fd3
+  pushlist 'NPCSales' 0x40911
+  pushlist 'NPCSales' 0x409e3
+  pushlist 'NPCSales' 0x40a1b
+  pushlist 'NPCSales' 0x1736a7
+  pushlist 'NPCSales' 0x172673
+  pushlist 'NPCSales' 0x40d35
+  pushlist 'NPCSales' 0x40d34
+  pushlist 'NPCSales' 0x41054
+  pushlist 'NPCSales' 0x40955
+  pushlist 'NPCSales' 0x24944c
+  pushlist 'NPCSales' 0x2492ba
+  pushlist 'NPCSales' 0x24570c
+  pushlist 'NPCSales' 0x24881f
+  pushlist 'NPCSales' 0x25a227
+  pushlist 'NPCSales' 0x25a38c
+  pushlist 'NPCSales' 0x256ad6
+  pushlist 'NPCSales' 0x256c8b
+  pushlist 'NPCSales' 0x403c9
+  pushlist 'NPCSales' 0x403ca
+  pushlist 'NPCSales' 0x40446
+  pushlist 'NPCSales' 0x40447
+endif
+while list 'runebooks' > 0
+  /////////////////////////////
+  /////////////////////////////
+  if list 'Runes' == 0
+    pushlist 'Runes' 7
+    pushlist 'Runes' 13
+    pushlist 'Runes' 19
+    pushlist 'Runes' 25
+    pushlist 'Runes' 31
+    pushlist 'Runes' 37
+    pushlist 'Runes' 43
+    pushlist 'Runes' 49
+    pushlist 'Runes' 55
+    pushlist 'Runes' 61
+    pushlist 'Runes' 67
+    pushlist 'Runes' 73
+    pushlist 'Runes' 79
+    pushlist 'Runes' 85
+    pushlist 'Runes' 91
+    pushlist 'Runes' 97
+  endif
+  while list 'Runes' > 0
+    ///////////////////////////
+    ////////Recall cooldown////////
+    while timer 'sacredcooldown' <= 6500
+      pause 100
+    endwhile
+    ////////actual recall action////////
+    pause 500
+    useobject runebooks[0]
+    waitforgump 0x554b87f3 7000
+    replygump 0x554b87f3 Runes[0]
+    pause 5000
+    settimer 'sacredcooldown' 0
+    poplist 'Runes' front
+    clearignorelist
+    if @injournal 'That location is blocked'
+      poplist 'Runes' 'front'
+      clearjournal
+      replay
+    endif
+    //do something
+    for 0 to NPCSales
+      if @findobject NPCSales[]
+        clearjournal
+        waitforcontext 'found' 1 2000
+        pause 1000
+        if @injournal 'The total of thy purchase'
+          waitforcontext 'ingotkey' 2 15000
+          waitforgump 0x6abce12 15000
+          replygump 0x6abce12 0
+          ignoreobject 'found'
+        elseif @injournal 'Have a look around'
+          ignoreobject 'found'
+        elseif @injournal 'I cannot teach thee'
+          ignoreobject 'found'
+        elseif @injournal 'I will teach thee'
+          ignoreobject 'found'
+        endif
+      endif
+    endfor
+  endwhile
+endwhile

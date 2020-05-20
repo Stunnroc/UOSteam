@@ -1,0 +1,60 @@
+@setalias 'sortthis' 'backpack'
+if @findtype 0xeff 46 'sortthis' //dyes
+  @moveitem 'found' 0x407bdbea
+elseif @findtype 0xeff 1209 'sortthis' //dyes
+  @moveitem 'found' 0x407bdbec
+elseif @findtype 0xeff 456 'sortthis' //dyes
+  @moveitem 'found' 0x407bdbfa
+elseif @findtype 0xeff 5 'sortthis' //dyes
+  @moveitem 'found' 0x407bdbfc
+elseif @findtype 0xeff 1050 'sortthis' //dyes
+  @moveitem 'found' 0x407bdc0c
+elseif @findtype 0xeff 591 'sortthis' //dyes
+  @moveitem 'found' 0x407bdc0e
+elseif @findtype 0xeff 551 'sortthis' //dyes
+  @moveitem 'found' 0x407bdc04
+elseif @findtype 0xeff 1001 'sortthis' //dyes
+  @moveitem 'found' 0x407bdc0a
+elseif @findtype 0xeff 1008 'sortthis' //dyes
+  @moveitem 'found' 0x407bdbf5
+elseif @findtype 0xeff 0 'sortthis' //dyes
+  @moveitem 'found' 0x407bdc07
+elseif @findtype 0xeff 325 'sortthis' //dyes
+  @moveitem 'found' 0x407bdbee
+elseif @findtype 0xefa 1109 'sortthis' // tome of enlightenment
+  @moveitem 'found' 0x42895477
+elseif @findtype 0x27a3 0 'sortthis' //pilfered dancer fans
+  @moveitem 'found' 0x430f782c
+elseif @findtype 0x277d 0 'sortthis' //Ancient Samuri Do
+  @moveitem 'found' 0x42245f39
+elseif @findtype 0x2798 0 'sortthis' //Ancient farmers kasa
+  @moveitem 'found' 0x42245f39
+elseif @findtype 0x2805 0 'sortthis' //flute of renewal
+  @moveitem 'found' 0x437d8db5
+elseif @findtype 0x241d 0 'sortthis' //Ancient urn
+  @moveitem 'found' 0x437d50f7
+elseif @findtype 0x2853 0 'sortthis' //sword display
+  @moveitem 'found' 0x437d50f7
+elseif @findtype 0x278f 0 'sortthis' //black lotus hood
+  @moveitem 'found' 0x422edd58
+elseif @findtype 0x27a2 0 'sortthis' //the destroyer
+  @moveitem 'found' 0x41cc8cbe
+elseif @findtype 0x27a8 0 'sortthis' //Peasants bokuto
+  @moveitem 'found' 0x41cc2df1
+elseif @findtype 0x27ae 0 'sortthis' //dragon nunchaku
+  @moveitem 'found' 0x41cadfc6
+elseif @findtype 0x27a5 0 'sortthis' //hanzo bow
+  @moveitem 'found' 0x43441f35
+elseif @findtype 0x2785 0 'sortthis' //daimyo helm
+  @moveitem 'found' 0x434404ce
+elseif @findtype 0x27a6 0 'sortthis' //exiler
+  @moveitem 'found' 0x41d6b190
+elseif @findtype 0x277e 0 'sortthis' //arms of tact
+  @moveitem 'found' 0x40e5c213
+elseif @findtype 0x27af 0 'sortthis' //demon fork
+  @moveitem 'found' 0x41994f9d
+elseif @findtype 0x2788 0 'sortthis' //legs of stability
+  @moveitem 'found' 0x43449eac
+elseif @findtype 0x2792 0 'sortthis' //glove of the sun
+  @moveitem 'found' 0x43449ae0
+endif

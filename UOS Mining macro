@@ -1,0 +1,59 @@
+if not @findalias 'portableforge'
+  promptalias 'portableforge'
+endif
+if @findtype 0x19b7 'any' 'backpack' 1 0
+  @moveitem 'found' 0x40ee42b9
+endif
+if @usetype! 0x19b9 'any' 'backpack'
+  waitfortarget 15000
+  @target! 'portableforge'
+elseif @usetype! 0x19b8 'any' 'backpack'
+  waitfortarget 15000
+  @target! 'portableforge'
+elseif @usetype! 0x19ba 'any' 'backpack'
+  waitfortarget 15000
+  @target! 'portableforge'
+endif
+if not listexists 'miningerrormessages'
+  createlist 'miningerrormessages'
+  pushlist 'miningerrormessages' 'no metal here'
+  pushlist 'miningerrormessages' "You can't mine there"
+  pushlist 'miningerrormessages' "Target cannot be seen"
+  pushlist 'miningerrormessages' "You can't mine that"
+endif
+if @findtype 0xf39 'any' 'backpack'
+  useobject 'found'
+else
+  if @usetype 0x1eb8
+    waitforgump 0x38920abd 15000
+    replygump 0x38920abd 8
+    waitforgump 0x38920abd 15000
+    replygump 0x38920abd 72
+    waitforgump 0x38920abd 15000
+    replygump 0x38920abd 0
+  endif
+endif
+waitfortarget 500
+if direction == 0
+  targettileoffset 0 -1 0
+elseif direction == 1
+  targettileoffset 1 -1 0
+elseif direction == 2
+  targettileoffset 1 0 0
+elseif direction == 3
+  targettileoffset 1 1 0
+elseif direction == 4
+  targettileoffset 0 1 0
+elseif direction == 5
+  targettileoffset -1 1 0
+elseif direction == 6
+  targettileoffset -1 0 0
+elseif direction == 7
+  targettileoffset -1 -1 0
+endif
+pause 200
+if @findtype 0x1bf2
+  waitforcontext 0x42194713 2 15000
+  waitforgump 0x6abce12 15000
+  replygump 0x6abce12 0
+endif

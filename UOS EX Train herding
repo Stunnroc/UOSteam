@@ -1,0 +1,17 @@
+@getenemy 'enemy' 'criminal' 'gray' 'closest'
+if not @findobject 'crook'
+  headmsg 'Selecione o crook'
+  promptalias 'crook'
+endif
+if skill 'herding' < 100.1
+  @useobject 'crook'
+  waitfortarget 1500
+  @target! 'enemy'
+  waitfortarget 1500
+  targettileoffset! 0 -2 0
+  pause 1000
+else
+  headmsg 'Skill Completa!'
+  stop
+endif
+

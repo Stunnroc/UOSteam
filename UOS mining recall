@@ -1,0 +1,137 @@
+//Author: Experience
+//Title: Recalling Miner
+//Description: Recalling Miner. Must have a 1 Pickaxe or ingots.
+//You will need a book with the default rune marked right next to your storage.
+//Stand South of each Spot you want to mine
+//All Books must have 16 runes to run properly!!
+//Be sure to stock Regs before playing!
+removelist 'Runes'
+removelist 'OreBook'
+@clearjournal
+if not @findalias 'Ore Storage'
+  headmsg 'Select the container you wish to store Ore in...'
+  promptalias 'Ore Storage'
+endif
+if not @findobject 'Ore1'
+  promptalias 'Ore1'
+endif
+if not @findobject 'Ore2'
+  promptalias 'Ore2'
+endif
+if not @findobject 'HomeOre'
+  headmsg 'Select the book with your home/storage rune'
+  promptalias 'HomeOre'
+endif
+if not listexists 'OreBook'
+  createlist 'OreBook'
+endif
+if list 'OreBook' == 0
+  pushlist 'OreBook' 'Ore1'
+  pushlist 'OreBook' 'Ore2'
+endif
+if @findtype '0xf39' 'any' 'backpack' 'any' '2'
+  headmsg 'Pick found. Ready!'
+elseif @findtype '0x1bf2' '0' 'backpack' 'any' '2' and skill 'tinkering' > 80
+  headmsg 'resorting to Tinkering....'
+  @usetype '0x1eb8' 'any' 'backpack' 'any' '2'
+  waitforgump 0x38920abd 1500
+  replygump 0x38920abd 8
+  waitforgump 0x38920abd 1500
+  replygump 0x38920abd 114
+  waitforgump 0x38920abd 1500
+  replygump 0x38920abd 114
+else
+  headmsg 'No way to mine found...'
+  stop
+endif
+if not listexists 'Runes'
+  createlist 'Runes'
+endif
+if list 'Runes' == 0
+  pushlist 'Runes' 5
+  pushlist 'Runes' 11
+  pushlist 'Runes' 17
+  pushlist 'Runes' 23
+  pushlist 'Runes' 29
+  pushlist 'Runes' 35
+  pushlist 'Runes' 41
+  pushlist 'Runes' 47
+  pushlist 'Runes' 53
+  pushlist 'Runes' 59
+  pushlist 'Runes' 65
+  pushlist 'Runes' 71
+  pushlist 'Runes' 77
+  pushlist 'Runes' 83
+  pushlist 'Runes' 89
+  pushlist 'Runes' 95
+endif
+for 0 to OreBook
+  for 0 to 'Runes'
+    pause 500
+    while mana < 40
+    endwhile
+    @clearjournal
+    pause 500
+    useobject OreBook[]
+    waitforgump 0x554b87f3 5000
+    replygump 0x554b87f3 Runes[]
+    pause 4000
+    sysmsg 'Rune' 33
+    sysmsg Runes[] 33
+    if injournal 'blocked' 'system'
+      @clearjournal
+      replay
+    elseif injournal 'recharge' 'system'
+      clearjournal
+      pause 3000
+    endif
+    while not @injournal 'There is no metal here to mine' 'system'
+      //use Pick to northern tile until specified weight is reached
+      pause 300
+      usetype '0xf39' 'any' 'backpack' 'any' '2'
+      waitfortarget 1000
+      targettileoffset 0 -1 0
+      pause 800
+      if @injournal "You can't mine there." "system"
+        headmsg 'Bad Rune'
+        @clearjournal
+        poplist 'Runes' 'front'
+        break
+      endif
+      // once weight is reached go home, if getting overweight, lower it
+      if weight > '500'
+        useobject "Ore Storage"
+        waitforgump 0x6223e460 1000
+        replygump 0x6223e460 1
+        waitforgump 0x8a10ef10 1000
+        replygump 0x8a10ef10 2
+        waitforgump 0x6223e460 1000
+        replygump 0x6223e460 0
+        pause 100
+        @canceltarget
+        waitforgump 0x6223e460 1000
+        replygump 0x6223e460 0
+      endif
+      canceltarget
+    endwhile
+    if mana < 25
+      headmsg 'Need mana'
+      useskill 'meditation'
+      while mana < 40
+      endwhile
+    endif
+  endfor
+  poplist 'Runes' 'front'
+endfor
+//recall home so Ore container is found
+pause 1000
+if mana < 25
+  headmsg 'Need mana'
+  useskill 'meditation'
+  while mana < 40
+  endwhile
+endif
+cast 'recall'
+autotargetobject 'HomeOre'
+pause 4000
+poplist 'OreBook' 'front'

@@ -1,0 +1,49 @@
+if @findtype 0xe79 2165 'backpack'
+  if property "gem" 'found'
+    @setalias 'gemkey' 'found'
+  endif
+endif
+if not @listexists 'gemstuff'
+  @createlist 'gemstuff'
+  @pushlist 'gemstuff' '0xf26'  // Diamond
+  @pushlist 'gemstuff' '0xf19'  // Sapphire
+  @pushlist 'gemstuff' '0xf13'  // Ruby
+  @pushlist 'gemstuff' '0xf21'  // Star Sapphire
+  @pushlist 'gemstuff' '0xf10'  // Emerald
+  @pushlist 'gemstuff' '0xf15'  // Citrine
+  @pushlist 'gemstuff' '0xf16'  // Amethyst
+  @pushlist 'gemstuff' '0xf2d'  // Tourmaline
+  @pushlist 'gemstuff' '0xf25'  // Amber
+  @pushlist 'gemstuff' '0x3198' // Blue Diamond
+  @pushlist 'gemstuff' '0x3199' // Brilliant Amber
+  @pushlist 'gemstuff' '0x3192' // Dark Sapphire
+  @pushlist 'gemstuff' '0x3195' // Ecru Citrine
+  @pushlist 'gemstuff' '0x3197' // Fire Ruby
+  @pushlist 'gemstuff' '0x3194' // Perfect Emerald
+  @pushlist 'gemstuff' '0x3193' // Turquoise
+  @pushlist 'gemstuff' '0x3196' // White Pearl
+  @pushlist 'gemstuff' '0x1ea7' // Arcane Gemendif
+endif
+for 0 to gemstuff
+  while @findtype gemstuff[] 'any' 'backpack'
+    @setalias 'gemz' 'found'
+    if @targetexists
+      @target! 'gemz'
+    else
+      @useobject 'gemkey'
+      waitforgump 309845371 1500
+      @replygump 0x1277dd7b 30
+      waitforgump 309845371 1500
+    endif
+  endwhile
+endfor
+@canceltarget
+@unsetalias 'gemkey'
+@removelist 'gemstuff'
+if @gumpexists 309845371
+  replygump 0x1277dd7b 0
+  replay
+else
+  headmsg 'Done with Gem keys.' 32
+  stop
+endif

@@ -1,0 +1,70 @@
+if not @findobject 'bag4'
+  promptalias 'bag4'
+endif
+if not listexists 'Jewelry'
+  @createlist 'Jewelry'
+endif
+if list 'Jewelry' == 0
+  @pushlist 'Jewelry' 0x108a
+  @pushlist 'Jewelry' 0x1f09
+  @pushlist 'Jewelry' 0x1086
+  @pushlist 'Jewelry' 0x1f06
+endif
+if not listexists 'Skill'
+  @createlist 'Skill'
+endif
+if list 'Skill' == 0
+  @pushlist 'Skill' 'Anatomy'
+  @pushlist 'Skill' 'Animal Lore'
+  @pushlist 'Skill' 'Animal Taming'
+  @pushlist 'Skill' 'Archery'
+  @pushlist 'Skill' 'Bushido'
+  @pushlist 'Skill' 'Discordance'
+  @pushlist 'Skill' 'Evaluating Intelligence'
+  @pushlist 'Skill' 'Fencing'
+  @pushlist 'Skill' 'Focus'
+  @pushlist 'Skill' 'Necromancy'
+  @pushlist 'Skill' 'Mace Fighting'
+  @pushlist 'Skill' 'Magery'
+  @pushlist 'Skill' 'Meditation'
+  @pushlist 'Skill' 'Musicianship'
+  @pushlist 'Skill' 'Necromancy'
+  @pushlist 'Skill' 'Ninjitsu'
+  @pushlist 'Skill' 'Parrying'
+  @pushlist 'Skill' 'Provocation'
+  @pushlist 'Skill' 'Peacemaking'
+  @pushlist 'Skill' 'Spirit Speak'
+  @pushlist 'Skill' 'Stealing'
+  @pushlist 'Skill' 'Stealth'
+  @pushlist 'Skill' 'Swordsmanship'
+  @pushlist 'Skill' 'Tactics'
+  @pushlist 'Skill' 'Vetinary'
+endif
+for 0 to Jewelry
+  if @findtype Jewelry[] 'any' 'bag4'
+    @setalias 'js' 'found'
+    //waitforproperties '2' 3000
+    for 0 to Skill
+      if @property Skill[] 'js' == 15
+        //sysmsg 'Got One' '1990'
+        //msg '[e gasp'
+        @moveitem 'js' 0x408b1b82
+        pause 600
+      elseif @property Skill[] 'js' == 14
+        @moveitem 'js' 0x41c9079d
+        pause 600
+      elseif @property Skill[] 'js' == 13
+        @moveitem 'js' 0x408b1b81
+        pause 600
+      elseif @property Skill[] 'js' == 12
+        @moveitem 'js' 0x408b1b89
+        pause 600
+      elseif @property 'Luck' 'js' == 100
+        @moveitem 'js' 0x422b187f
+        pause 600
+      else
+        ignoreobject 'js'
+      endif
+    endfor
+  endif
+endfor

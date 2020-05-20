@@ -1,0 +1,43 @@
+if @findtype 0x176b '69' 'backpack'
+  if property "tailor" 'found'
+    @setalias 'tailorkey' 'found'
+  endif
+endif
+if not @listexists 'tailorstuff'
+  @createlist 'tailorstuff'
+  @pushlist 'tailorstuff' 0x1079 //Hides
+  @pushlist 'tailorstuff' 0x1766 //Cloth
+  @pushlist 'tailorstuff' 0xdf8 //Wool
+  @pushlist 'tailorstuff' 0x26b4 //Scales
+  @pushlist 'tailorstuff' 0x1081 //Leather
+  @pushlist 'tailorstuff' 0xf95 //Bolt of Cloth
+  @pushlist 'tailorstuff' 0xe1e //Ball of yarn
+  @pushlist 'tailorstuff' 0xfa0 //Spool of thread
+  @pushlist 'tailorstuff' 0xdf9 //Bale of Cotton
+  @pushlist 'tailorstuff' 0x1a9c //Flax
+  //@pushlist 'tailorstuff'
+endif
+for 0 to tailorstuff
+  while @findtype tailorstuff[] 'any' 'backpack'
+    @setalias 'tailorz' 'found'
+    if @targetexists
+      @target! 'tailorz'
+    else
+      @useobject 'tailorkey'
+      waitforgump 1106836505 1500
+      @replygump 0x41f8fc19 60029
+	  waitforgump 1106836505 1500
+    endif
+  endwhile
+endfor
+@canceltarget
+@unsetalias 'tailorkey'
+@unsetalias 'tailorz'
+@removelist 'tailorstuff'
+if @gumpexists 1106836505
+  replygump 0x41f8fc19 0
+  replay
+  else
+  headmsg 'Done with Tailor keys.' 32
+stop
+endif 

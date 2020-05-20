@@ -1,0 +1,86 @@
+@setalias 'lpbag' 0x46590f9d
+if @findtype 0x22c4 69 'backpack'
+  if @property "tool house" 'found'
+    @setalias 'toolkeys' 'found'
+  endif
+endif
+if @findtype 0x176b 20 'backpack'
+  if property "metal worker" 'found'
+    @setalias 'metalworkkeys' 'found'
+  endif
+endif
+if not @listexists 'tools'
+  createlist 'tools'
+  @pushlist 'tools' 0x1eb8 //tinker tool
+  @pushlist 'tools' 0x102a //Hammer
+  @pushlist 'tools' 0xf39 //shovel
+endif
+//withdraw ingots if needed
+if @findtype 0x1bf2 0x0 'backpack' 20
+  //check backpack weight and item contents
+  if contents 'backpack' > 100 or weight > 400
+    //move lockpicks to bag defined above
+    if @movetype 0x14fc 'backpack' 'lpbag'
+    else
+      //store tools to reduce items and/or weight in backpack
+      for 0 to tools
+        while @findtype tools[]
+          @setalias 'toolz' 'found'
+          if @targetexists
+            @target 'toolz'
+            waitforgump 1513449091 1500
+          else
+            @useobject 'toolkeys'
+            waitforgump 1513449091 1500
+            @replygump 0x5a356683 60030
+            waitforgump 1513449091 1500
+          endif
+        endwhile
+      endfor
+    endif
+  else
+    //begin crafting
+    if @gumpexists 949095101
+      //make hammer
+      if skill 'tinkering' < 40
+        @replygump 0x38920abd 8
+        waitforgump 949095101 5000
+        @replygump 0x38920abd 86
+        waitforgump 949095101 5000
+        //make shovel
+      elseif skill 'tinkering' < 45
+        @replygump 0x38920abd 8
+        waitforgump 949095101 5000
+        @replygump 0x38920abd 72
+        waitforgump 949095101 5000
+        //make lockpick
+      elseif skill 'tinkering' < 95
+        @replygump 0x38920abd 8
+        waitforgump 949095101 5000
+        @replygump 0x38920abd 121
+        waitforgump 949095101 5000
+      endif
+    else
+      //use tinker tool to open gump
+      if @findtype 0x1eb8 0x0 'backpack'
+        @setalias 'tinktool' 'found'
+        @useobject 'tinktool'
+      else
+        //withdraw tinker tool from tool key
+        @useobject 'toolkeys'
+        waitforgump 1513449091 1500
+        @replygump 0x5a356683 60006
+        waitforgump 1513449091 1500
+        @replygump 0x5a356683 0
+      endif
+    endif
+  endif
+else
+  //withdraw ingots from metal key
+  @useobject 'metalworkkeys'
+  waitforgump 4213074123 1500
+  @replygump 0xfb1e68cb 60000
+  waitforgump 4213074123 1500
+  @replygump 0xfb1e68cb 0
+  pause 500
+endif

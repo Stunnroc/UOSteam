@@ -1,0 +1,22 @@
+if not @listexists 'leashnobles1'
+  createlist 'leashnobles1'
+  @pushlist 'leashnobles1' 2130
+  @pushlist 'leashnobles1' 2124
+  @pushlist 'leashnobles1' 18
+  @pushlist 'leashnobles1' 43
+endif
+if not @findobject 'petleash'
+  if @findtype 0x1374 0x0 'backpack'
+    if @property 'leash' 'found'
+      @setalias 'petleash' 'found'
+    endif
+  endif
+endif
+for 0 to leashnobles
+  while @findtype 0x21f1 leashnobles1[] 'backpack'
+  @setalias 'petnoble' 'found'
+    @useobject 'petnoble'
+        pause 500
+  endwhile
+endfor
+@removelist 'leashnobles1'

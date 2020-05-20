@@ -1,0 +1,34 @@
+//this will craft items to 90 taming with jewerly
+//have bank open
+@setalias 'pet1' 0x64547b //your pets serial
+if @findtype 0x1373 0x0 0x46590f9c //brush
+  @setalias 'brush' 'found'
+endif
+while @findtype 0xe2b 'any' 'backpack' //white pet dye
+  useobject 'found'
+  waitfortarget 1500
+  @target! 'pet1'
+endwhile
+if @findtype 0xf0e '1042' 'backpack' //dirty bottle
+  useobject 'found'
+  waitfortarget 1500
+  @target! 0x409badd5 //water source beside you
+endif
+if @findtype 0xf0e 0x0 'backpack' //bottles
+  if @findtype 0xfa9 0x0 'backpack' //dyes
+    if @gumpexists 949095101
+      replygump 0x38920abd 2
+    else
+      useobject 'brush'
+      waitforgump 949095101 1500
+    endif
+  else
+    waitforcontext 0x62124 1 1500  //buys dyes from vendor beside you
+    pause 500
+  endif
+else
+  @movetype 0xf0e 0x46590f9d 'backpack' (0 0 0) 0x0 20 //will pull 20 bottles from a bag inside your bank
+endif
+if @skill 'animal taming' >= 90
+  stop
+endif

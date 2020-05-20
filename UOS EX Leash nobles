@@ -1,0 +1,24 @@
+if not @listexists 'leashnobles2'
+  createlist 'leashnobles2'
+  @pushlist 'leashnobles2' 0x706b0d
+  @pushlist 'leashnobles2' 0x7cb4d6
+  @pushlist 'leashnobles2' 0x706b19
+  @pushlist 'leashnobles2' 0x706b18
+endif
+if not @findobject 'petleash'
+  if @findtype 0x1374 0x0 'backpack'
+    if @property 'leash' 'found'
+      @setalias 'petleash' 'found'
+    endif
+  endif
+endif
+for 0 to leashnobles2
+  while @findobject leashnobles2[]
+    @useobject 'petleash'
+    waitfortarget 1500
+    //pet serial
+    @target! leashnobles2[]
+    pause 500
+  endwhile
+endfor
+@removelist 'leashnobles2'

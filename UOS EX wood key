@@ -1,0 +1,53 @@
+if not @findobject 'axe1' 'any' 'backpack'
+  headmsg 'please target your axe' 32
+  @promptalias 'axe1' 15000
+endif
+if @findtype 0x176b 88 'backpack'
+  if property "wood worker" 'found'
+    @setalias 'woodkeys' 'found'
+  endif
+endif
+if not listexists 'woodstuff'
+  createlist 'woodstuff'
+  @pushlist 'woodstuff' '0x1bd4'  // Shafts
+  @pushlist 'woodstuff' '0x2f5f'  // Switch
+  @pushlist 'woodstuff' '0x3191'  // Luminescent fungi
+  @pushlist 'woodstuff' '0x318f'  // Bark Fragment
+  @pushlist 'woodstuff' '0x3190'  // Parasitic Plant
+  @pushlist 'woodstuff' '0x1bd1'  // Feathers
+  @pushlist 'woodstuff' '0x1bfb'  // Bolts
+  @pushlist 'woodstuff' '0xf3f'  // Arrows
+  @pushlist 'woodstuff' '0x1bd7'  // All types of wood
+endif
+while @findtype 0x1bdd 'any' 'backpack'
+  @setalias 'logs' 'found'
+  useobject 'axe1'
+  waitfortarget 1500
+  @target! 'logs'
+endwhile
+for 0 to woodstuff
+  while @findtype woodstuff[] 'any' 'backpack'
+    @setalias 'woodz' 'found'
+    if @targetexists
+      @target! 'woodz'
+    else
+      @useobject 'woodkeys'
+      waitforgump 173511501 1500
+      @replygump 0xa57934d 60023
+      waitforgump 173511501 1500
+    endif
+  endwhile
+endfor
+@canceltarget
+@removelist 'woodstuff'
+@unsetalias 'logs'
+@unsetalias 'woodz'
+@unsetalias 'woodkeys'
+pause 1000
+if @gumpexists 173511501
+  @replygump 0xa57934d 0
+  replay
+else
+  sysmsg 'Done with Woodworkers keys.' 32
+  stop
+endif

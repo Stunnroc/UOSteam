@@ -1,0 +1,120 @@
+if @findtype 0x14ef 1168 'backpack'
+  waitforproperties 'found' 3000
+  if @property 'Alchemy' 'found'
+    @moveitem 'found' 0x40728b48
+  elseif @property 'Anatomy' 'found'
+    @moveitem 'found' 0x40728b4c
+  elseif @property 'Animal Lore' 'found'
+    @moveitem 'found' 0x4072becf
+  elseif @property 'Animal Taming' 'found'
+    @moveitem 'found' 0x407248c5
+  elseif @property 'Archery' 'found'
+    @moveitem 'found' 0x4072bec8
+  elseif @property 'Arms Lore' 'found'
+    @moveitem 'found' 0x4072becc
+  elseif @property 'Begging' 'found'
+    @moveitem 'found' 0x407248bf
+  elseif @property 'Blacksmithy' 'found'
+    @moveitem 'found' 0x4072bed0
+  elseif @property 'Bowcraft' 'found'
+    @moveitem 'found' 0x4072bed7
+  elseif @property 'Bushido' 'found'
+    @moveitem 'found' 0x407248c2
+  elseif @property 'Camping' 'found'
+    @moveitem 'found' 0x40728b3e
+  elseif @property 'Carpentry' 'found'
+    @moveitem 'found' 0x4072bed3
+  elseif @property 'Cartography' 'found'
+    @moveitem 'found' 0x4072bed4
+  elseif @property 'Chivalry' 'found'
+    @moveitem 'found' 0x407248c8
+  elseif @property 'Cooking' 'found'
+    @moveitem 'found' 0x4072bec7
+  elseif @property 'Detecting Hidden' 'found'
+    @moveitem 'found' 0x40728b43
+  elseif @property 'Discordance' 'found'
+    @moveitem 'found' 0x40728b4a
+  elseif @property 'Evaluating Intelligence' 'found'
+    @moveitem 'found' 0x4072becb
+  elseif @property 'Fencing' 'found'
+    @moveitem 'found' 0x407248c7
+  elseif @property 'Fishing' 'found'
+    @moveitem 'found' 0x40728b47
+  elseif @property 'Focus' 'found'
+    @moveitem 'found' 0x407248c6
+  elseif @property 'Forensic Evaluation' 'found'
+    @moveitem 'found' 0x40728b42
+  elseif @property 'Healing' 'found'
+    @moveitem 'found' 0x407248ba
+  elseif @property 'Herding' 'found'
+    @moveitem 'found' 0x407248cb
+  elseif @property 'Hiding' 'found'
+    @moveitem 'found' 0x40728b45
+  elseif @property 'Imbuing' 'found'
+    @moveitem 'found' 0x407248bd
+  elseif @property 'Inscription' 'found'
+    @moveitem 'found' 0x40728b4d
+  elseif @property 'Item Identification' 'found'
+    @moveitem 'found' 0x40728b4b
+  elseif @property 'Lockpicking' 'found'
+    @moveitem 'found' 0x40728b3d
+  elseif @property 'Lumberjacking' 'found'
+    @moveitem 'found' 0x4072becd
+  elseif @property 'Mace Fighting' 'found'
+    @moveitem 'found' 0x4072bec9
+  elseif @property 'Magery' 'found'
+    @moveitem 'found' 0x4072bed9
+  elseif @property 'Meditation' 'found'
+    @moveitem 'found' 0x407248ce
+  elseif @property 'Mining' 'found'
+    @moveitem 'found' 0x40728b4e
+  elseif @property 'Musicianship' 'found'
+    @moveitem 'found' 0x4072beca
+  elseif @property 'Mysticism' 'found'
+    @moveitem 'found' 0x407248be
+  elseif @property 'Necromancy' 'found'
+    @moveitem 'found' 0x407248c9
+  elseif @property 'Ninjitsu' 'found'
+    @moveitem 'found' 0x4072bed1
+  elseif @property 'Parrying' 'found'
+    @moveitem 'found' 0x407248bc
+  elseif @property 'Peacemaking' 'found'
+    @moveitem 'found' 0x40728b50
+  elseif @property 'Poisoning' 'found'
+    @moveitem 'found' 0x407248cd
+  elseif @property 'Provocation' 'found'
+    @moveitem 'found' 0x407248c3
+  elseif @property 'Remove Trap' 'found'
+    @moveitem 'found' 0x40728b51
+  elseif @property 'Resisting Spells' 'found'
+    @moveitem 'found' 0x40728b41
+  elseif @property 'Snooping' 'found'
+    @moveitem 'found' 0x4072beda
+  elseif @property 'Spellweaving' 'found'
+    @moveitem 'found' 0x4072bed8
+  elseif @property 'Spirit Speak' 'found'
+    @moveitem 'found' 0x40728b44
+  elseif @property 'Stealing' 'found'
+    @moveitem 'found' 0x40728b3c
+  elseif @property 'Stealth' 'found'
+    @moveitem 'found' 0x40728b49
+  elseif @property 'Swordsmanship' 'found'
+    @moveitem 'found' 0x4072bed5
+  elseif @property 'Tactics' 'found'
+    @moveitem 'found' 0x4072bec6
+  elseif @property 'Tailoring' 'found'
+    @moveitem 'found' 0x407248c0
+  elseif @property 'Taste Identification' 'found'
+    @moveitem 'found' 0x4072bed2
+  elseif @property 'Throwing' 'found'
+    @moveitem 'found' 0x4072bedb
+  elseif @property 'Tinkering' 'found'
+    @moveitem 'found' 0x407248c1
+  elseif @property 'Tracking' 'found'
+    @moveitem 'found' 0x40728b40
+  elseif @property 'Veterinary' 'found'
+    @moveitem 'found' 0x407248bb
+  elseif @property 'Wrestling' 'found'
+    @moveitem 'found' 0x40728b4f
+  endif
+endif

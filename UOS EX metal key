@@ -1,0 +1,52 @@
+if @findtype 0x176b 20 'backpack'
+  if property "metal worker" 'found'
+    @setalias 'metalworkkeys' 'found'
+  endif
+endif
+if not listexists 'metalstuffz'
+  createlist 'metalstuffz'
+  @pushlist 'metalstuffz' '0x1bf2' // All ingots share same ID
+endif
+if not @listexists 'oretypes'
+  createlist 'oretypes'
+endif
+@pushlist 'oretypes' 0x19b9
+@pushlist 'oretypes' 0x19b8
+@pushlist 'oretypes' 0x19ba
+if not @findobject 'portableforge'
+  if @findtype 0xe32 1161 'backpack'
+    @setalias 'portableforge' 'found'
+  endif
+endif
+for 0 to oretypes
+  while @findtype 'oretypes[]'
+    @setalias 'oretosmelt' 'found'
+    @useobject 'oretosmelt'
+    waitfortarget 1500
+    @target! 'portableforge'
+  endwhile
+endfor
+for 0 to metalstuffz
+  while @findtype 'metalstuffz[]'
+    @setalias 'ingotz' 'found'
+    if targetexists
+      @target 'ingotz'
+    else
+      useobject 'metalworkkeys'
+      waitforgump 4213074123 1500
+      replygump 0xfb1e68cb 60015
+      waitforgump 4213074123 1500
+    endif
+  endwhile
+endfor
+@canceltarget
+@removelist 'metalstuffz'
+@unsetalias 'ingotz'
+@unsetalias 'metalworkkeys'
+if @gumpexists 4213074123
+  @replygump 0xfb1e68cb 0
+  replay
+else
+  headmsg 'Done with Metalworkers keys.' 32
+  stop
+endif

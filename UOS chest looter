@@ -1,0 +1,259 @@
+if not @findobject 'TreasureChest'
+  promptalias 'TreasureChest'
+endif
+if not @findobject 'LootBag'
+  promptalias 'LootBag'
+endif
+if not listexists 'Graphics'
+  createlist 'Graphics'
+  // Cloth hats
+  @pushlist 'Graphics' 0x1544
+  @pushlist 'Graphics' 0x1540
+  @pushlist 'Graphics' 0x1713
+  @pushlist 'Graphics' 0x1715
+  @pushlist 'Graphics' 0x1714
+  @pushlist 'Graphics' 0x1716
+  @pushlist 'Graphics' 0x1717
+  @pushlist 'Graphics' 0x1718
+  @pushlist 'Graphics' 0x1719
+  @pushlist 'Graphics' 0x171a
+  @pushlist 'Graphics' 0x171b
+  @pushlist 'Graphics' 0x171c
+  @pushlist 'Graphics' 0x2306
+  // Metal Hats
+  @pushlist 'Graphics' 0x1f0b
+  @pushlist 'Graphics' 0x140a
+  @pushlist 'Graphics' 0x2b6e
+  @pushlist 'Graphics' 0x1412
+  @pushlist 'Graphics' 0x140c
+  @pushlist 'Graphics' 0x13bb
+  @pushlist 'Graphics' 0x2b71
+  @pushlist 'Graphics' 0x1451
+  @pushlist 'Graphics' 0x1408
+  @pushlist 'Graphics' 0x2b72
+  @pushlist 'Graphics' 0x140e
+  @pushlist 'Graphics' 0x2b70
+  @pushlist 'Graphics' 0x1db9
+  @pushlist 'Graphics' 0x2b6f
+  @pushlist 'Graphics' 0x2b73
+  // Bear masks deer masks
+  @pushlist 'Graphics' 0x1545
+  @pushlist 'Graphics' 0x1547
+  // Neck
+  @pushlist 'Graphics' 0x13c7
+  @pushlist 'Graphics' 0x2b69
+  @pushlist 'Graphics' 0x1413
+  @pushlist 'Graphics' 0x2fc7
+  @pushlist 'Graphics' 0x2b76
+  @pushlist 'Graphics' 0x13d6
+  // Gloves
+  @pushlist 'Graphics' 0x1414
+  @pushlist 'Graphics' 0x2b75
+  @pushlist 'Graphics' 0x13eb
+  @pushlist 'Graphics' 0x1450
+  @pushlist 'Graphics' 0x13d5
+  @pushlist 'Graphics' 0x2b6a
+  @pushlist 'Graphics' 0x2fc6
+  @pushlist 'Graphics' 0x13c6
+  // Arms
+  @pushlist 'Graphics' 0x144e
+  @pushlist 'Graphics' 0x13ee
+  @pushlist 'Graphics' 0x13dc
+  @pushlist 'Graphics' 0x2b6c
+  @pushlist 'Graphics' 0x13cd
+  @pushlist 'Graphics' 0x2fc8
+  @pushlist 'Graphics' 0x2b77
+  @pushlist 'Graphics' 0x1410
+  // Chest
+  @pushlist 'Graphics' 0x13cc
+  @pushlist 'Graphics' 0x1415
+  @pushlist 'Graphics' 0x13bf
+  @pushlist 'Graphics' 0x13db
+  @pushlist 'Graphics' 0x13ec
+  @pushlist 'Graphics' 0x2b74
+  @pushlist 'Graphics' 0x2b67
+  @pushlist 'Graphics' 0x2fc5
+  @pushlist 'Graphics' 0x144f
+  // Legs
+  @pushlist 'Graphics' 0x2fc9
+  @pushlist 'Graphics' 0x13f0
+  @pushlist 'Graphics' 0x2fca
+  @pushlist 'Graphics' 0x2b78
+  @pushlist 'Graphics' 0x1411
+  @pushlist 'Graphics' 0x13be
+  @pushlist 'Graphics' 0x2b6b
+  @pushlist 'Graphics' 0x1452
+  @pushlist 'Graphics' 0x13cb
+  @pushlist 'Graphics' 0x13da
+  // Skirt shorts
+  @pushlist 'Graphics' 0x1c08
+  @pushlist 'Graphics' 0x1c00
+  // Female armor
+  @pushlist 'Graphics' 0x1c04
+  @pushlist 'Graphics' 0x1c0a
+  @pushlist 'Graphics' 0x1c0c
+  @pushlist 'Graphics' 0x1c02
+  @pushlist 'Graphics' 0x1c06
+  // Axes
+  @pushlist 'Graphics' 0xf43
+  @pushlist 'Graphics' 0xf45
+  @pushlist 'Graphics' 0x13fb
+  @pushlist 'Graphics' 0x1443
+  @pushlist 'Graphics' 0xf49
+  @pushlist 'Graphics' 0xf47
+  @pushlist 'Graphics' 0xf4d
+  @pushlist 'Graphics' 0x143e
+  @pushlist 'Graphics' 0xf4b
+  // Swords
+  @pushlist 'Graphics' 0xf5e
+  @pushlist 'Graphics' 0x13ff
+  @pushlist 'Graphics' 0x13b6
+  @pushlist 'Graphics' 0x13b9
+  @pushlist 'Graphics' 0xf5e
+  @pushlist 'Graphics' 0x1441
+  @pushlist 'Graphics' 0xf61
+  @pushlist 'Graphics' 0xf61
+  @pushlist 'Graphics' 0xec3
+  @pushlist 'Graphics' 0xe86
+  // Fencing
+  @pushlist 'Graphics' 0x1403
+  @pushlist 'Graphics' 0xf62
+  @pushlist 'Graphics' 0x1401
+  @pushlist 'Graphics' 0x1405
+  @pushlist 'Graphics' 0xf52
+  // Bows
+  @pushlist 'Graphics' 0xf50
+  @pushlist 'Graphics' 0x26c3
+  @pushlist 'Graphics' 0x13fd
+  @pushlist 'Graphics' 0x26c2
+  @pushlist 'Graphics' 0x13b2
+  // Maces
+  @pushlist 'Graphics' 0x143d
+  @pushlist 'Graphics' 0xe89
+  @pushlist 'Graphics' 0x1407
+  @pushlist 'Graphics' 0x13b4
+  @pushlist 'Graphics' 0x1439
+  @pushlist 'Graphics' 0x143b
+  @pushlist 'Graphics' 0x13b0
+  @pushlist 'Graphics' 0xf5c
+  @pushlist 'Graphics' 0xdf0
+  @pushlist 'Graphics' 0x13f8
+  // Shields
+  @pushlist 'Graphics' 0x1b76
+  @pushlist 'Graphics' 0x1b7b
+  @pushlist 'Graphics' 0x1b72
+  @pushlist 'Graphics' 0x1b73
+  @pushlist 'Graphics' 0x1b74
+  @pushlist 'Graphics' 0x1b79
+  @pushlist 'Graphics' 0x1b7a
+  //wands
+  //removed till next release.
+  //instruments
+  @pushlist 'Graphics' 0xeb1
+  @pushlist 'Graphics' 0xeb2
+  @pushlist 'Graphics' 0xeb3
+  @pushlist 'Graphics' 0xe9c
+  @pushlist 'Graphics' 0xe9e
+  @pushlist 'Graphics' 0xe9d
+  @pushlist! 'Graphics' 0x2260
+  // Gold
+  @pushlist! 'Graphics' 0xeed
+  //Gems
+  @pushlist! 'Graphics' 0xf16
+  @pushlist! 'Graphics' 0xf13
+  @pushlist! 'Graphics' 0xf26
+  @pushlist! 'Graphics' 0xf15
+  @pushlist! 'Graphics' 0xf10
+  @pushlist! 'Graphics' 0xf2d
+  @pushlist! 'Graphics' 0xf19
+  @pushlist! 'Graphics' 0xf25
+  @pushlist! 'Graphics' 0xf21
+  // Paragon Chests
+  @pushlist! 'Graphics' 0xe41
+  @pushlist! 'Graphics' 0xe7c
+  // Tmaps
+  @pushlist! 'Graphics' 0x14ec
+  // Reagents
+  @pushlist! 'Graphics' 0xf88
+  @pushlist! 'Graphics' 0xf8d
+  @pushlist! 'Graphics' 0xf86
+  @pushlist! 'Graphics' 0xf7a
+  @pushlist! 'Graphics' 0xf7b
+  @pushlist! 'Graphics' 0xf84
+  @pushlist! 'Graphics' 0xf85
+  @pushlist! 'Graphics' 0xf8c
+  @pushlist 'Graphics' 0x1f36
+  @pushlist 'Graphics' 0x1f46
+  @pushlist 'Graphics' 0x1f2d // Reactive Armor
+  @pushlist 'Graphics' 0x1f2e // Clumsy
+  @pushlist 'Graphics' 0x1f2f // Create Food
+  @pushlist 'Graphics' 0x1f30 // Feeblemind
+  @pushlist 'Graphics' 0x1f31 // Heal
+  @pushlist 'Graphics' 0x1f32 // Magic Arrow
+  @pushlist 'Graphics' 0x1f33 // Night Sight
+  @pushlist 'Graphics' 0x1f34 // Weaken
+  @pushlist 'Graphics' 0x1f35 // Agility
+  @pushlist 'Graphics' 0x1f36 // Cunning
+  @pushlist 'Graphics' 0x1f37 // Cure
+  @pushlist 'Graphics' 0x1f38 // Harm
+  @pushlist 'Graphics' 0x1f39 // Magic Trap
+  @pushlist 'Graphics' 0x1f3a // Magic Untrap
+  @pushlist 'Graphics' 0x1f3b // Protection
+  @pushlist 'Graphics' 0x1f3c // Strength
+  @pushlist 'Graphics' 0x1f3d // Bless
+  @pushlist 'Graphics' 0x1f3e // Fireball
+  @pushlist 'Graphics' 0x1f3f // Magic Lock
+  @pushlist 'Graphics' 0x1f40 // Poison
+  @pushlist 'Graphics' 0x1f41 // Telekinesis
+  @pushlist 'Graphics' 0x1f42 // Teleport
+  @pushlist 'Graphics' 0x1f43 // Unlock
+  @pushlist 'Graphics' 0x1f44 // Wall of Stone
+  @pushlist 'Graphics' 0x1f45 // Arch Cure
+  @pushlist 'Graphics' 0x1f46 // Arch Protection
+  @pushlist 'Graphics' 0x1f47 // Curse
+  @pushlist 'Graphics' 0x1f48 // Fire Field
+  @pushlist 'Graphics' 0x1f49 // Greater Heal
+  @pushlist 'Graphics' 0x1f4a // Lightning
+  @pushlist 'Graphics' 0x1f4b // Mana Drain
+  @pushlist 'Graphics' 0x1f4c // Recall
+  @pushlist 'Graphics' 0x1f4d // Blade Spirit
+  @pushlist 'Graphics' 0x1f4e // Dispel Field
+  @pushlist 'Graphics' 0x1f4f // Incognito
+  @pushlist 'Graphics' 0x1f50 // Magic Reflection
+  @pushlist 'Graphics' 0x1f51 // Mind Blast
+  @pushlist 'Graphics' 0x1f52 // Paralyze
+  @pushlist 'Graphics' 0x1f53 // Poison Field
+  @pushlist 'Graphics' 0x1f54 // Summon Creature
+  @pushlist 'Graphics' 0x1f55 // Dispel
+  @pushlist 'Graphics' 0x1f56 // Energy Bolt
+  @pushlist 'Graphics' 0x1f57 // Explosion
+  @pushlist 'Graphics' 0x1f58 // Invisibility
+  @pushlist 'Graphics' 0x1f59 // Mark
+  @pushlist 'Graphics' 0x1f5a // Mass Curse
+  @pushlist 'Graphics' 0x1f5b // Paralyze Field
+  @pushlist 'Graphics' 0x1f5c // Reveal
+  @pushlist 'Graphics' 0x1f5d // Chain Lightning
+  @pushlist 'Graphics' 0x1f5e // Energy Field
+  @pushlist 'Graphics' 0x1f5f // Flamestrike
+  @pushlist 'Graphics' 0x1f60 // Gate Travel
+  @pushlist 'Graphics' 0x1f61 // Mana Vampire
+  @pushlist 'Graphics' 0x1f62 // Mass Dispel
+  @pushlist 'Graphics' 0x1f63 // Meteor Swarm
+  @pushlist 'Graphics' 0x1f64 // Polymorph
+  @pushlist 'Graphics' 0x1f65 // Earthquake
+  @pushlist 'Graphics' 0x1f66 // Energy Vortex
+  @pushlist 'Graphics' 0x1f67 // Ressurrection
+  @pushlist 'Graphics' 0x1f68 // Summon Air Elemental
+  @pushlist 'Graphics' 0x1f69 // Summon Daemon
+  @pushlist 'Graphics' 0x1f6a // Summon Earth Elemental
+  @pushlist 'Graphics' 0x1f6b // Summon Fire Elemental
+  @pushlist 'Graphics' 0x1f6c // Summon Water Elemental
+endif
+for 0 to 'Graphics'
+  while @findtype 'Graphics&#91
+    &#93
+    ' 'any' 'TreasureChest'
+    moveitem 'found' 'LootBag'
+  endwhile
+endfor
+headmsg 'Done Looting'

@@ -1,0 +1,82 @@
+//UOS EX mining at feet
+if @findtype 0x176b 20 'backpack'
+  if property "metal worker" 'found'
+    @setalias 'metalworkkeys' 'found'
+  endif
+endif
+if not listexists 'metalkeys'
+  createlist 'metalkeys'
+  @pushlist 'metalkeys' 0x1bf2
+endif
+if not @listexists 'oretypes'
+  createlist 'oretypes'
+  @pushlist 'oretypes' 0x19b9
+  @pushlist 'oretypes' 0x19b8
+  @pushlist 'oretypes' 0x19ba
+endif
+if not @findobject 'portableforge'
+  if @findtype 0xe32 1161 'backpack'
+    @setalias 'portableforge' 'found'
+  endif
+endif
+for 0 to metalkeys
+  while @findtype metalkeys[]
+    @setalias 'ingots' 'found'
+    if targetexists
+      @target 'ingots'
+      waitforgump 4213074123 1500
+    else
+      useobject 'metalworkkeys'
+      waitforgump 4213074123 1500
+      replygump 0xfb1e68cb 60015
+      waitforgump 4213074123 1500
+    endif
+  endwhile
+endfor
+if weight < '400'
+  if @findtype 0xf39 'any' 'backpack'
+    @setalias 'shovel' 'found'
+    useobject 'shovel'
+  else
+    useobject 0x41133523
+    waitforgump 1513449091 1500
+    replygump 0x5a356683 60008
+    waitforgump 1513449091 1500
+    replygump 0x5a356683 0
+  endif
+  if direction == 0
+    targettileoffset 0 -1 0
+  elseif direction == 1
+    targettileoffset 1 -1 0
+  elseif direction == 2
+    targettileoffset 1 0 0
+  elseif direction == 3
+    targettileoffset 1 1 0
+  elseif direction == 4
+    targettileoffset 0 1 0
+  elseif direction == 5
+    targettileoffset -1 1 0
+  elseif direction == 6
+    targettileoffset -1 0 0
+  elseif direction == 7
+    targettileoffset -1 -1 0
+    pause 500
+  endif
+else
+  for 0 to oretypes
+    while @findtype 'oretypes[]'
+      @setalias 'oretosmelt' 'found'
+      @useobject 'oretosmelt'
+      waitfortarget 1500
+      @target! 'portableforge'
+      pause 300
+      replay
+    endwhile
+  endfor
+  @canceltarget
+  @removelist 'metalkeys'
+  @unsetalias 'ingots'
+  if @gumpexists 4213074123
+    @replygump 0xfb1e68cb 0
+  endif
+endif

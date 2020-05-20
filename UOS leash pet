@@ -1,0 +1,7 @@
+if @findtype 0x25d7 45 'backpack' 'any'
+  @useobject 'found'
+else
+  @useobject 0x409cb14a
+  waitfortarget 1500
+  target! 0x27ab3 1000
+endif

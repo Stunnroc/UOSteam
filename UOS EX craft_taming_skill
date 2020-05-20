@@ -1,0 +1,97 @@
+@setalias 'dyevendor' 0x62124 //vendor id make sure dye is on buy list
+@setalias 'pet1' 0x64547b //pet of yours to use dye or shrink on
+@setalias 'watertroth' 0x409badd5 //set to a water source to clean dirty bottles
+if @findtype 0x1373 0x0 'backpack'
+  @setalias 'brush' 'found'
+endif
+while @findtype 0xe2b 'any' 'backpack' //white pet dye
+  @useobject 'found'
+  waitfortarget 1500
+  @target! 'pet1'
+endwhile
+if @findtype 0xf0e '1042' 'backpack' //dirty bottle
+  @useobject 'found'
+  waitfortarget 1500
+  @target! 'watertroth'
+endif
+@canceltarget
+if @findtype 0xf0e 0x0 'backpack' //bottles
+  if @skill 'animal taming' < 90
+    if @findtype 0xfa9 0x0 'backpack' //dyes
+      if @gumpexists 949095101
+        @replygump 0x38920abd 2
+        pause 300
+      else
+        @useobject 'brush'
+        waitforgump 949095101 15000
+      endif
+    else
+      //open vendor and buy brush
+      waitforcontext 'dyevendor' 1 1500
+      pause 500
+    endif
+  elseif @skill 'animal taming' < 100
+    if @findtype 0x97a 1132 'backpack' 20 //petrified wood
+      if @findtype 0xe24 1151 'backpack' 10 //spring water
+        if @gumpexists 949095101
+          @replygump 0x38920abd 1
+          waitforgump 949095101 1500
+          @replygump 0x38920abd 2
+          waitforgump 949095101 1500
+          pause 300
+        else
+          @useobject 'brush'
+        endif
+      else
+        if @gumpexists 247257139
+          @replygump 0xebcd833 60013
+          pause 300
+        else
+          @useobject 'spellkey'
+        endif
+      endif
+    else
+      if @gumpexists 247257139
+        @replygump 0xebcd833 60014
+        pause 300
+      else
+        @useobject 'spellkey'
+      endif
+    endif
+  elseif @skill 'animal taming' < 110
+    if @findtype 0xf7b 0x0 'backpack' 15
+      if @findtype 0xe1f 656 'backpack' 25
+        if @gumpexists 949095101
+          @replygump 0x38920abd 1
+          waitforgump 949095101 1500
+          @replygump 0x38920abd 9
+          waitforgump 949095101 1500
+          pause 300
+        else
+          @useobject 'brush'
+        endif
+      else
+        if @gumpexists 247257139
+          @replygump 0xebcd833 60015
+          pause 300
+        else
+          @useobject 'spellkey'
+        endif
+      endif
+    else
+      if @gumpexists 247257139
+        @replygump 0xebcd833 60001
+        pause 300
+      else
+        @useobject 'spellkey'
+      endif
+    endif
+  endif
+else
+  if @gumpexists 247257139
+    @replygump 0xebcd833 60020
+    pause 300
+  else
+    @useobject 'spellkey'
+  endif
+endif

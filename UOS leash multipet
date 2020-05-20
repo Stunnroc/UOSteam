@@ -1,0 +1,18 @@
+if not listexists 'mycu'
+  createlist 'mycu'
+  pushlist 'mycu' 0x1d46eb
+  pushlist 'mycu' 0x2367cd
+endif
+if @findtype 0x1870 'any' 'backpack'
+  @useobject 'found'
+else
+  msg 'all follow me'
+  pause 500
+  @usetype 0x1374
+  waitfortarget 15000
+  for 0 to mycu
+    while @findobject mycu[]
+      @target! mycu[]
+    endwhile
+  endfor
+endif

@@ -1,0 +1,21 @@
+//sewing kit type 0xf9d
+//toolbox id  0x40277be3
+if not @findobject 'toolbox'
+  promptalias 'toolbox'
+endif
+replygump 0x38920abd 12
+waitforgump 0x38920abd 1500
+if not listexists 'toolgraphic'
+  createlist 'toolgraphic'
+  pushlist 'toolgraphic' 0xf9d
+  pushlist 'toolgraphic' 0x13e3
+endif
+for 0 to toolgraphic
+  if @findtype toolgraphic[] 'any' 'backpack'
+    moveitem 'found' 'toolbox'
+  endif
+endfor
+if not @findtype 0x1bf2 0 'backpack' 8
+  headmsg 'out of ingots' 32
+  stop
+endif

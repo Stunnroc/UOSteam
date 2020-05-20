@@ -1,0 +1,55 @@
+if not @findobject 'craftbag'
+  promptalias 'craftbag' 15000
+  headmsg 'target your craftbag'
+endif
+@removelist 'deedlist'
+if not @findobject 'tokenbag'
+  promptalias 'tokenbag' 15000
+  headmsg 'target your tokenbag'
+endif
+if not listexists 'deedlist'
+  createlist 'deedlist'
+  @pushlist 'deedlist' 0x171a
+  @pushlist 'deedlist' 0x2798 //kasa
+  @pushlist 'deedlist' 0x1717 //straw hat
+  @pushlist 'deedlist' 0x1716 //tall straw hat
+  @pushlist 'deedlist' 0x1efd //fancy shirt
+  @pushlist 'deedlist' 0x1516 //skirt
+  @pushlist 'deedlist' 0x152e //short pants
+  @pushlist 'deedlist' 0x1539 // pants
+  @pushlist 'deedlist' 0x1ffd // surcoat
+  @pushlist 'deedlist' 0x1540 //bandana
+  @pushlist 'deedlist' 0x1715 // cap
+  @pushlist 'deedlist' 0x1719 //bonnet
+endif
+if not @gumpexists 0x38920abd
+  @usetype 0xf9d
+  waitforgump 0x38920abd 5000
+else
+  //make last
+  replygump 0x38920abd 21
+  waitforgump 0x38920abd 15000
+  for 0 to 'deedlist'
+    while @findtype 'deedlist[]' 0x0 'craftbag'
+      setalias 'deeditem' 'found'
+      waitforproperties 'deeditem' 3000
+      if not property 'exceptional' 'deeditem'
+        moveitem 'deeditem' 'tokenbag'
+        pause 1000
+      endif
+      if not @gumpexists 0x3af2018d
+        @useobject 0x42d1155b
+        waitforgump 0x4e40f75a 15000
+        replygump 0x4e40f75a 10000
+        waitforgump 0x3af2018d 15000
+      else
+        //click add item on gump
+        replygump 0x3af2018d 200
+        waitfortarget 15000
+      endif
+      //target item to add to deed
+      target! 'deeditem'
+      pause 500
+    endwhile
+  endfor
+endif
