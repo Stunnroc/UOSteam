@@ -1,5 +1,4 @@
 //UOSteam Excelsior lockpick training macro
- 
 //Written by Stunnroc
 //////////////////////////////////////////
 if not @findobject 'boxtopick' 'any'
@@ -19,13 +18,11 @@ if @findtype 0x14fc 0x0 'backpack'
         waitfortarget 1500
         @target! 'boxtopick'
         pause 300
-        headmsg '1' 32
         @clearjournal
         replay
       else
         @useobject 'boxtopick'
         pause 300
-        headmsg '2' 32
         replay
       endif
     else
@@ -34,7 +31,6 @@ if @findtype 0x14fc 0x0 'backpack'
   else
     @useobject 'pickz'
     waitfortarget 1500
-    headmsg '3' 32
     pause 300
     replay
   endif
