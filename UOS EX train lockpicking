@@ -1,0 +1,44 @@
+//UOSteam Excelsior lockpick training macro
+ 
+//Written by Stunnroc
+//////////////////////////////////////////
+if not @findobject 'boxtopick' 'any'
+  promptalias 'boxtopick' 15000
+  headmsg 'Please target the box to lockpick'
+endif
+if @findtype 0x14fc 0x0 'backpack'
+  @setalias 'pickz' 'found'
+  pause 100
+  if @targetexists
+    @target! 'boxtopick'
+    pause 100
+    if @injournal 'this does not appear'
+      if @findtype 0x100e 'any' 'boxtopick'
+        @setalias 'lpboxkey' 'found'
+        @useobject 'lpboxkey'
+        waitfortarget 1500
+        @target! 'boxtopick'
+        pause 300
+        headmsg '1' 32
+        @clearjournal
+        replay
+      else
+        @useobject 'boxtopick'
+        pause 300
+        headmsg '2' 32
+        replay
+      endif
+    else
+      pause 3100
+    endif
+  else
+    @useobject 'pickz'
+    waitfortarget 1500
+    headmsg '3' 32
+    pause 300
+    replay
+  endif
+else
+  headmsg 'no picks found' 32
+  stop
+endif
